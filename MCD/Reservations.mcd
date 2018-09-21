@@ -1,4 +1,4 @@
-Users: id, prenom, nom, mail, mdp, tel, etat, level, date_debut, date_fin
+Users: id, prenom, nom, mail, mdp, tel, etat, level
 RESERVER, 01 Users, 0N Place, 0N Reservation: date_debut, date_fin
 Place: id_place, nom
 
