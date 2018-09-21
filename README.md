@@ -3,7 +3,7 @@
 Document généré par DILLINGER.IO
 
 
-# Fonctionnalités + Urls
+### Fonctionnalités + Urls
 
 Client : /index.php
   - Inscription - /inscription.php 
