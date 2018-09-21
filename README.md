@@ -1,6 +1,19 @@
 # PARK'in
 --- V 1.0 BETA ---
 
+
+#### Park'in est une plateforme de réservation de parking :
+* ##### Trouvez le parking idéal
+   
+     Quel que soit votre besoin, votre place vous attend.
+* ##### Réservez votre place
+ 
+    Réservez votre place en quelques clics depuis votre mobile ou sur Internet. Soyez tranquille, l’annulation est gratuite !
+* ##### Garez-vous !
+ 
+    Votre place est 100% garantie. Laissez-vous guider jusqu’à votre parking et garez-vous. Partez serein, votre voiture est en sécurité.
+
+
 ### Fonctionnalités + Urls
 
 Client : /index.php
@@ -19,18 +32,6 @@ Administrateur: /control
   - Parametre général - /parametre.php
 
   
-#### Park'in est une plateforme de réservation de parking :
-* ##### Trouvez le parking idéal
-   
-     Quel que soit votre besoin, votre place vous attend.
-* ##### Réservez votre place
- 
-    Réservez votre place en quelques clics depuis votre mobile ou sur Internet. Soyez tranquille, l’annulation est gratuite !
-* ##### Garez-vous !
- 
-    Votre place est 100% garantie. Laissez-vous guider jusqu’à votre parking et garez-vous. Partez serein, votre voiture est en sécurité.
-
-
 ### Language / Framework utilisés
 
 
