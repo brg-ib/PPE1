@@ -4,6 +4,6 @@ Place: id_place, nom
 
 Reservation: id_res, etat
 
-APPARTIENT, 01 Users, 1N Liste_attente
+APPARTIENT, 01 Users, 0N Liste_attente
 Liste_attente: id, first,first_free
 Setting: duree
