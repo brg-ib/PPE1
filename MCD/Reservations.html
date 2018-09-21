@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+</style>
+</head>
+<body>
+<div id='mld'>
+<div>
+  <span class='relation'>Users</span> (
+    <span class='primary'>id</span>,
+    <span class='normal'>prenom</span>,
+    <span class='normal'>nom</span>,
+    <span class='normal'>mail</span>,
+    <span class='normal'>mdp</span>,
+    <span class='normal'>tel</span>,
+    <span class='normal'>etat</span>,
+    <span class='normal'>level</span>,
+    <span class='normal'>date_debut</span>,
+    <span class='normal'>date_fin</span>,
+    <span class='foreign'>id_place</span>,
+    <span class='foreign'>id_res</span>,
+    <span class='normal'>date_debut.1</span>,
+    <span class='normal'>date_fin.1</span>,
+    <span class='foreign'>id.1</span>
+  )
+</div>
+<div>
+  <span class='relation'>Place</span> (
+    <span class='primary'>id_place</span>,
+    <span class='normal'>nom</span>
+  )
+</div>
+<div>
+  <span class='relation'>Reservation</span> (
+    <span class='primary'>id_res</span>,
+    <span class='normal'>etat</span>
+  )
+</div>
+<div>
+  <span class='relation'>Liste_attente</span> (
+    <span class='primary'>id</span>,
+    <span class='normal'>first</span>,
+    <span class='normal'>first_free</span>
+  )
+</div>
+<!--
+<div>
+  <span class='relation'>Setting</span> (
+    <span class='primary'>duree</span>
+  )
+</div>
+-->
+</div>
+</body>
+</html>
