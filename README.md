@@ -16,28 +16,29 @@
 
 ### Fonctionnalités + Urls
 
-Client : /index.php
+Front-End : /index.php
   - Inscription - /inscription.php 
+  - Connexion -/connexion.php
   - Profil - /profil.php
   - Réserver une place - /reserver.php
 
 
-Administrateur: /control
+Back-End: /admin (folder)
   - Profil - /admin/profil.php
-  - Gérer les rangs - /admin/rang.php 
   - Gérer les places - /admin/place.php
   - Gérer les clients - /admin/client.php
   - Gérer la file d'attente - /admin/file.php
   - Gérer les inscriptions - /admin/inscription.php
-  - Parametre général - /parametre.php
+  - Parametre général - /settings.php
 
   
 ### Language / Framework utilisés
 
 
-* [HTML] - HTML enhanced for web apps!
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [jQuery] - duh
+* [HTML] - 
+* [CSS] - 
+* [Twitter Bootstrap] -
+* [jQuery] - 
 
 
 ### Installation
