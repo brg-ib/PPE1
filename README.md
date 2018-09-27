@@ -41,7 +41,4 @@ Back-End: /admin (folder)
 * [jQuery] - 
 
 
-### Installation
-
-
 
