@@ -157,57 +157,81 @@ span.rvts26
 }
 span.rvts27
 {
- text-decoration: underline;
+ font-size: 11pt;
+ font-weight: bold;
 }
 span.rvts28
 {
- font-size: 11pt;
+ font-size: 12pt;
  font-weight: bold;
+ text-decoration: underline;
 }
 span.rvts29
 {
  font-size: 12pt;
  font-weight: bold;
- text-decoration: underline;
+ color: #222222;
 }
 span.rvts30
 {
- font-size: 12pt;
- color: #333333;
+ font-weight: bold;
+ color: #222222;
 }
 span.rvts31
 {
  font-size: 12pt;
+ color: #222222;
 }
 span.rvts32
 {
- font-size: 14pt;
- font-weight: bold;
+ font-size: 12pt;
+ color: #222222;
+ text-decoration: underline;
 }
 span.rvts33
 {
  font-size: 12pt;
- text-decoration: underline;
+ font-style: italic;
+ color: #222222;
 }
 span.rvts34
 {
  font-size: 12pt;
  color: #333333;
- text-decoration: underline;
 }
 span.rvts35
+{
+ font-size: 12pt;
+}
+span.rvts36
+{
+ font-size: 14pt;
+ font-weight: bold;
+}
+span.rvts37
+{
+ font-size: 12pt;
+ text-decoration: underline;
+}
+span.rvts38
+{
+ font-size: 12pt;
+ color: #333333;
+ text-decoration: underline;
+}
+span.rvts39
 {
  font-size: 12pt;
  font-weight: bold;
  color: #333333;
  text-decoration: underline;
 }
-span.rvts36
+span.rvts40
 {
  font-style: italic;
  font-weight: bold;
 }
-span.rvts37
+span.rvts41
 {
  font-weight: bold;
  text-decoration: underline;
@@ -301,6 +325,10 @@ p,ul,ol /* Paragraph Style */
  background: #ffffff;
  padding: 0px 0px 0px 32px;
  margin: 4px 0px 0px 0px;
+}
+.rvps14
+{
+ background: #ffffff;
 }
 /* ========== Lists ========== */
 .list0 {text-indent: 0px; padding: 0; margin: 0 0 0 24px; list-style-position: outside; list-style-type: disc;}
