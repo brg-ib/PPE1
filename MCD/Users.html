@@ -27,11 +27,8 @@
     <span class='normal'>tel</span>,
     <span class='normal'>etat</span>,
     <span class='normal'>level</span>,
-    <span class='foreign'>id_place</span>,
-    <span class='normal'>date_debut</span>,
-    <span class='normal'>date_fin</span>,
-    <span class='foreign'>id</span>,
-    <span class='foreign'>id_liste_attente</span>
+    <span class='normal'>rang</span>,
+    <span class='foreign'>id</span>
   )
 </div>
 <div>
@@ -41,9 +38,11 @@
   )
 </div>
 <div>
-  <span class='relation'>Liste_attente</span> (
-    <span class='primary'>id_liste_attente</span>,
-    <span class='normal'>date</span>
+  <span class='relation'>date</span> (
+    <span class='primary'>date_debut</span>,
+    <span class='foreign'>id_user</span>,
+    <span class='foreign'>id_place</span>,
+    <span class='normal'>date_fin</span>
   )
 </div>
 </div>
