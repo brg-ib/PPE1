@@ -14,7 +14,8 @@
   <span class='relation'>Setting</span> (
     <span class='primary'>id</span>,
     <span class='normal'>duree</span>,
-    <span class='normal'>etat</span>
+    <span class='normal'>etat</span>,
+    <span class='foreign'>id_user</span>
   )
 </div>
 <div>
@@ -28,7 +29,9 @@
     <span class='normal'>etat</span>,
     <span class='normal'>level</span>,
     <span class='normal'>rang</span>,
-    <span class='foreign'>id</span>
+    <span class='foreign'>id_place</span>,
+    <span class='foreign'>date_debut</span>,
+    <span class='normal'>date_fin</span>
   )
 </div>
 <div>
@@ -37,14 +40,13 @@
     <span class='normal'>nom</span>
   )
 </div>
+<!--
 <div>
   <span class='relation'>date</span> (
-    <span class='primary'>date_debut</span>,
-    <span class='foreign'>id_user</span>,
-    <span class='foreign'>id_place</span>,
-    <span class='normal'>date_fin</span>
+    <span class='primary'>date_debut</span>
   )
 </div>
+-->
 </div>
 </body>
 </html>
