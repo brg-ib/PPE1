@@ -1,10 +1,10 @@
 Setting: id,duree,etat
-
-CONFIGURER, 11 Users, 1N Setting 
-
+CONFIGURER, 11 Users, 1N Setting
 Users: id_user, prenom, nom, mail, mdp, tel, etat, level
 RESERVER, 01 Users, 0N Place: date_debut, date_fin
 Place: id_place, nom
 
+
 APPARTIENT, 01 Users, 0N Liste_attente
-Liste_attente: id_liste_attente, first,first_free
+
+Liste_attente: id_liste_attente, date
