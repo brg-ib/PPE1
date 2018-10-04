@@ -2,9 +2,7 @@ Setting: id,duree,etat
 CONFIGURER, 1N Users, 11 Setting
 Users: id_user, prenom, nom, mail, mdp, tel, etat, level,rang
 
-RESERVER, 01 Users, 0N Place,1N date: date_fin
+RESERVER, 0N Users, 0N Place,1N date: date_fin
 
 Place: id_place, nom
 date:date_debut
-
-

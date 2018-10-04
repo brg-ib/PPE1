@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
-# Généré par Mocodo 2.3.7 le Fri, 28 Sep 2018 06:23:40
+# Généré par Mocodo 2.3.7 le Thu, 04 Oct 2018 06:00:13
 
 from __future__ import division
 from math import hypot
@@ -9,7 +9,7 @@ import time, codecs
 
 import json
 
-with codecs.open('Parkin_geo.json') as f:
+with codecs.open('Users_geo.json') as f:
     geo = json.loads(f.read())
 (width,height) = geo.pop('size')
 for (name, l) in geo.items(): globals()[name] = dict(l)
@@ -174,10 +174,10 @@ lines += '\n\n<rect id="frame" x="0" y="0" width="%s" height="%s" fill="%s" stro
 lines += u"""\n\n<!-- Association RESERVER -->"""
 (x,y) = (cx[u"RESERVER"],cy[u"RESERVER"])
 (ex,ey) = (cx[u"Users"],cy[u"Users"])
-leg=straight_leg_factory(ex,ey,29,93,x,y,40,25,21+2*card_margin,15+2*card_margin)
+leg=straight_leg_factory(ex,ey,29,93,x,y,40,25,22+2*card_margin,15+2*card_margin)
 lines += u"""\n<line x1="%(ex)s" y1="%(ey)s" x2="%(ax)s" y2="%(ay)s" stroke="%(stroke_color)s" stroke-width="2"/>""" % {'ex': ex, 'ey': ey, 'ax': x, 'ay': y, 'stroke_color': colors['leg_stroke_color']}
 (tx,ty)=offset(*leg.card_pos(False,shift[u"RESERVER,Users"]))
-lines += u"""\n<text x="%(tx)s" y="%(ty)s" fill="%(text_color)s" font-family="Verdana" font-size="12">0,1</text>""" % {'tx': tx, 'ty': ty, 'text_color': colors['card_text_color']}
+lines += u"""\n<text x="%(tx)s" y="%(ty)s" fill="%(text_color)s" font-family="Verdana" font-size="12">0,N</text>""" % {'tx': tx, 'ty': ty, 'text_color': colors['card_text_color']}
 (ex,ey) = (cx[u"Place"],cy[u"Place"])
 leg=straight_leg_factory(ex,ey,31,34,x,y,40,25,22+2*card_margin,15+2*card_margin)
 lines += u"""\n<line x1="%(ex)s" y1="%(ey)s" x2="%(ax)s" y2="%(ay)s" stroke="%(stroke_color)s" stroke-width="2"/>""" % {'ex': ex, 'ey': ey, 'ax': x, 'ay': y, 'stroke_color': colors['leg_stroke_color']}
@@ -289,6 +289,6 @@ lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Ver
 lines += u"""\n</g>""" % {}
 lines += u'\n</svg>'
 
-with codecs.open("Parkin.svg", "w", "utf8") as f:
+with codecs.open("Users.svg", "w", "utf8") as f:
     f.write(lines)
-safe_print_for_PHP(u'Fichier de sortie "Parkin.svg" généré avec succès.')
+safe_print_for_PHP(u'Fichier de sortie "Users.svg" généré avec succès.')

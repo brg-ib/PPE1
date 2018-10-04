@@ -28,9 +28,14 @@
     <span class='normal'>tel</span>,
     <span class='normal'>etat</span>,
     <span class='normal'>level</span>,
-    <span class='normal'>rang</span>,
-    <span class='foreign'>id_place</span>,
-    <span class='foreign'>date_debut</span>,
+    <span class='normal'>rang</span>
+  )
+</div>
+<div>
+  <span class='relation'>RESERVER</span> (
+    <span class='foreign primary'>id_user</span>,
+    <span class='foreign primary'>id_place</span>,
+    <span class='foreign primary'>date_debut</span>,
     <span class='normal'>date_fin</span>
   )
 </div>
