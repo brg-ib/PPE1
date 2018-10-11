@@ -5,10 +5,15 @@ function liste_places($bdd)
 	$places=$bdd->query("Select * from place");
 	return $places->fetchALL();
 }
-function details_place($bdd,$idPlace)
+function get_place($bdd,$idPlace)
 {
 	$Place=$bdd->query("Select * from place where idPlace=".$idPlace);
 	return $Place->fetch();
+}
+function details_place($bdd,$idPlace)
+{
+	$Place=$bdd->query("Select p.*,r.*,u.* from place p, reservation r, users u where u.idUser= r.idUser and p.idPlace=r.idPlace and r.idPlace=".$idPlace);
+	return $Place->fetchALL();
 }
 function add_place($bdd,$nomPlace)
 {
