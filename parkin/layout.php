@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
   <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Park'in - Réservation de places de Parking en ligne">
-    <meta name="author" content="Brahim, Ihcen">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <title>Parkin | Réservation de places de parking en ligne</title>
+    <title>Park'in</title>
 
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -32,17 +32,24 @@
   <body id="page-top">
 
     <!-- Navigation -->
+	<?php
+require_once 'models/clientsModel.php';
+
+	?>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Park'in</a>
+        <a class="navbar-brand js-scroll-trigger" href="index.php"><!--<img class="img-responsive" src="tmp/img/logo.png" alt="Park'in logo" width="20%" height="30%">
+-->Park'in</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+		  <?php if (is_admin()) { ?>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">Accueil</a>
+              <a class="nav-link js-scroll-trigger" href="index.php">Acceuil</a>
             </li>
+			
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="index.php?module=places">Places</a>
             </li>
@@ -56,16 +63,39 @@
               <a class="nav-link js-scroll-trigger" href="index.php?module=reservations">Réservations</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.php?module=home&action=form_connexion"><span class="label label-info">Connexion</span></a>
+              <a class="nav-link js-scroll-trigger" href="index.php?module=settings">Settings</a>
             </li>
+			<?php } ?>
+			<li class="nav-item right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.php?module=home&action=form_inscription"><span class="label label-warning">Inscription</span></a>
-            </li>
+              <?php
+			  	
+if (!is_connected())
+	{
+		?>
+			  <a class="nav-link js-scroll-trigger btn btn-success" href="index.php?module=clients&action=form_connexion"><span class="label label-info">Connexion</span></a>
+	<?php } else { ?>
+				  <a class="nav-link js-scroll-trigger btn btn-success" href="index.php?module=clients&action=details&idClient=<?= $_SESSION['id']?>"><span class="label label-info"><?= $_SESSION['login'];?></span></a>
+	<?php } ?>
+		  </li>
+			<li class="nav-item">
+   <?php
+			  	
+if (!is_connected())
+	{
+		?>             
+			 <a class="nav-link js-scroll-trigger btn btn-danger" href="index.php?module=home&action=form_inscription"><span class="label label-warning">Inscription</span></a>
+<?php
+	} else
+	{ ?>
+			 <a class="nav-link js-scroll-trigger btn btn-danger" href="index.php?module=clients&action=deconnexion"><span class="label label-warning">Déconnexion</span></a>
+
+	<?php } ?>
+		  </li>
           </ul>
         </div>
       </div>
     </nav>
-
 
 <?= $content ; ?>
 
@@ -83,7 +113,7 @@
 
     <!-- Custom scripts for this tmplate -->
     <script src="tmp/js/creative.min.js"></script>
-
+	
 	<script>
 	$(document).ready(function() {
     $('#example').DataTable();

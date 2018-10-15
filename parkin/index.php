@@ -1,4 +1,6 @@
 <?php
+session_start();	
+
 require_once('models/homeModel.php');
 connexion_bd();
 
@@ -23,5 +25,6 @@ connexion_bd();
 	ob_end_clean(); // relance l'affichage
 	
 	include "layout.php";
+	
 
 ?>

@@ -11,4 +11,10 @@
 		die("bdd non trouvée");
 	}
 }
+
+function is_admin()
+{
+	if(isset($_SESSION['level']) && ($_SESSION['level']==3)) { return true; }  else {return false; }
+}
+
 ?>

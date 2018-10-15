@@ -13,6 +13,6 @@ switch($action)
 	case 'details':$idPlace=$_GET['idPlace']; form_details_place($bdd,$idPlace); break;
 	case 'form_update': $idPlace=$_GET['idPlace']; form_update_place($bdd,$idPlace); break;
 	case 'update':$idPlace=$_GET['idPlace']; $nomPlace=$_REQUEST['nomPlace'];  update_place($bdd,$nomPlace,$idPlace);  header('Location:index.php?module=places'); break;
-	case 'delete': $idPlace=$_GET['idPlace']; delete_place($bdd,$idPlace); break;
+	case 'delete': $idPlace=$_GET['idPlace']; delete_place($bdd,$idPlace);  header('Location:index.php?module=places'); break;
 }
  ?>

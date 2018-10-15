@@ -118,7 +118,6 @@ function form_details_place($bdd,$idPlace)
           <div class="col-lg-8 mx-auto text-center">
 		
 		  		  <h2>Détails de la place : <?=$Pl['nomPlace']?></h2>
-
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -152,7 +151,8 @@ function form_details_place($bdd,$idPlace)
 		<td><?php 
 		$date = new DateTime($Place['dateFin']);
 			echo 'Le <strong>'.$date->format('d-m-Y'.'</strong> à '.'H:i:s');
-		
+		if($Place['dateDebut']<= date("Y-m-d H:i:s") && $Place['dateFin']>= date("Y-m-d H:i:s"))
+			echo "<span class='btn btn-info' > en cours</span>";
 		?></td>		</tr>
 	<?php
 	}

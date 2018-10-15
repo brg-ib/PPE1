@@ -41,14 +41,15 @@ function delete_client($idUser)
 {
 			$reqDeleteUser=$bdd->query("delete from users where idUser=".$idUser);
 }
-/*
-function connecter($mailUser,$passwordUser)
+
+function connecter($bdd,$mailUser,$passwordUser)
 {
 			$reqConnexion=$bdd->query("select * from users where mailUser= '".$mailUser."' and passwordUser=sha1('".$passwordUser."')");
-			$Client=reqConnexion->fetch();
+			$Client=$reqConnexion->fetch();
 			session_start();
 			$_SESSION['connected']=true;
-			$_SESSION['login']=$Client['mailUser'];
+			$_SESSION['id']=$Client['idUser'];
+			$_SESSION['login']=$Client['nomUser']." ".$Client['prenomUser'];
 			$_SESSION['level']=$Client['levelUser'];
 			return $Client;
 			
@@ -58,9 +59,12 @@ function deconnecter()
 	session_start();
 	session_destroy();
 }
-function is_connected ()
+function is_connected()
 {
-	return (isset($_SESSION['connected']));
+	if(isset($_SESSION['connected']))
+		return true;
+	else
+		return false;
 }
-*/
+
 ?>
