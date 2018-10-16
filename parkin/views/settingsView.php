@@ -3,7 +3,7 @@
         <div class="row">
           <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase">
-			  Gestion des places
+			  Paramètrage
             </h1>
             <hr>
           </div>
@@ -12,7 +12,7 @@
       </div>
     </header>
 <?php
-function afficher_places($bdd,$Places)
+function afficher_settings($Settings)
 {
 	?>
 	<section>
@@ -20,34 +20,26 @@ function afficher_places($bdd,$Places)
 	  
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
-		  <div style="float: right;padding:12px 30px 14px"><a href="index.php?module=places&action=form_add" class="btn btn-b btn-sm smooth"><i class="fa fa-plus"></i> Ajouter une place</a></div>
+		  <div style="float: right;padding:12px 30px 14px"><a href="index.php?module=settings&action=form_add" class="btn btn-b btn-sm smooth"><i class="fa fa-plus"></i> Ajouter une setting</a></div>
 
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Nom</th>
-				<th>Etat</th>
+				<th>Valeur</th>
                 <th colspan="2">Opérations</th>
             </tr>
         </thead>
         <tbody>
 		<?php
-	foreach  ($Places as $Place)
+	foreach  ($Settings as $Setting)
 	{
 		?>
 		<tr>
-		<td><a href="index.php?module=places&action=details&idPlace=<?=$Place['idPlace']?>"><?= $Place['nomPlace'];?></a></td>
-		<td><?php
-				$P=details_place($bdd,$Place['idPlace']);
-				
-				if(($P) &&($P[0]['dateDebut']<= date("Y-m-d H:i:s")) && ($P[0]['dateFin']>= date("Y-m-d H:i:s"))){
-				echo "<span class='btn btn-danger' >Occupée par <strong>".$P[0]['nomUser']." ".$P[0]['prenomUser']."</strong></span>";}
-				else{
-			echo "<span class='btn btn-success' >Libre</span>";}
-
-		?></td>
-		<td><a href="index.php?module=places&action=form_update&idPlace=<?=$Place['idPlace']?>"><i class="fa fa-edit"></i></a></td>
-		<td><a href="index.php?module=places&action=delete&idPlace=<?=$Place['idPlace']?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette entrée'));"><i class="fa fa-trash-alt"></i></a></td>
+		<td><?= $Setting['cleSetting'];?></td>
+		<td><?= $Setting['valeurSetting'];?></td>
+		<td><a href="index.php?module=settings&action=form_update&idSetting=<?=$Setting['idSetting']?>"><i class="fa fa-edit"></i></a></td>
+		<td><a href="index.php?module=settings&action=delete&idSetting=<?=$Setting['idSetting']?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette entrée'));"><i class="fa fa-trash-alt"></i></a></td>
 		</tr>
 	<?php
 	}
@@ -55,8 +47,8 @@ function afficher_places($bdd,$Places)
         <tfoot>
             <tr>
                 <th>Nom</th>
-                <th>Etat</th>
-				<th colspan="2">Opérations</th>
+				<th>Valeur</th>
+                <th colspan="2">Opérations</th>
             </tr>
         </tfoot>
     </table>
@@ -64,11 +56,11 @@ function afficher_places($bdd,$Places)
           </div>
         </div>
       </div>
-	</section>
+	<section>
 	
 	<?php
 } 
-function form_add_place()
+function form_add_setting()
 {
 	?>
 	<section>
@@ -76,14 +68,14 @@ function form_add_place()
 	  
         <div class="row">
           <div class="col-lg-8 mx-auto">
-		  <h2>Ajouter une place</h2>
+		  <h2>Ajouter une setting</h2>
 	<form>
   <div class="form-group">
     <label for="nomUser">Nom</label>
-    <input type="text" class="form-control"  placeholder="Nom de la place" name="nomPlace">
+    <input type="text" class="form-control"  settingholder="Nom de la setting" name="nomSetting">
   </div>
  <input type="submit" class="btn btn-primary" name="ajouter" value="Ajouter" />
-	 <input type="hidden" name="module" value="places" />
+	 <input type="hidden" name="module" value="settings" />
 	<input type="hidden" name="action" value="add" />
 </form>
 </div>
@@ -93,26 +85,26 @@ function form_add_place()
 	<?php
 }
 
-function form_update_place($bdd,$idPlace)
+function form_update_setting($bdd,$idSetting)
 {
-	$Place=get_place($bdd,$idPlace);
+	$Setting=get_setting($bdd,$idSetting);
 	?>
-	<section>
-      <div class="container">
+<section>    
+	<div class="container">
 	  
         <div class="row">
           <div class="col-lg-8 mx-auto">
-		  		  <h2>Modifier une place : <?=$Place['nomPlace']?></h2>
+		  		  <h2>Modifier une setting : <?=$Setting['nomSetting']?></h2>
 
 	<form>
   <div class="form-group">
     <label for="nomUser">Nom</label>
-    <input type="text" class="form-control"  placeholder="Nom de la place" name="nomPlace" value="<?= $Place['nomPlace']; ?>" />
+    <input type="text" class="form-control"  settingholder="Nom de la setting" name="nomSetting" value="<?= $Setting['nomSetting']; ?>" />
   </div>
  <input type="submit" class="btn btn-primary" name="ajouter" value="Modifier" />
-	 <input type="hidden" name="module" value="places" />
+	 <input type="hidden" name="module" value="settings" />
 	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="idPlace" value="<?= $idPlace; ?>" />
+	<input type="hidden" name="idSetting" value="<?= $idSetting; ?>" />
 </form>
 </div>
 </div>
@@ -120,10 +112,10 @@ function form_update_place($bdd,$idPlace)
 </section>
 	<?php
 }
-function form_details_place($bdd,$idPlace)
+function form_details_setting($bdd,$idSetting)
 {
-		$Pl=get_place($bdd,$idPlace);
-		$Places=details_place($bdd,$idPlace);
+		$Pl=get_setting($bdd,$idSetting);
+		$Settings=details_setting($bdd,$idSetting);
 
 	?>
 	<section>
@@ -132,7 +124,7 @@ function form_details_place($bdd,$idPlace)
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
 		
-		  		  <h2>Détails de la place : <?=$Pl['nomPlace']?></h2>
+		  		  <h2>Détails de la setting : <?=$Pl['nomSetting']?></h2>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -143,30 +135,30 @@ function form_details_place($bdd,$idPlace)
         </thead>
         <tbody>
 		<?php
-		if (!$Places)
+		if (!$Settings)
 		{
 		?>
-		<td colspan="4">Pas de réservations pour cette place</td>
+		<td colspan="4">Pas de réservations pour cette setting</td>
 	<?php }
-	foreach  ($Places as $Place)
+	foreach  ($Settings as $Setting)
 	{
 		?>
 		<tr>
 		
-		<td><a href="index.php?module=clients&action=details&idClient=<?=$Place['idUser']?>">
+		<td><a href="index.php?module=clients&action=details&idClient=<?=$Setting['idUser']?>">
 		<?php
 		
-		echo $Place['nomUser']." ".$Place['prenomUser']; ?>
+		echo $Setting['nomUser']." ".$Setting['prenomUser']; ?>
 		</a></td>
 		<td><?php 
-		$date = new DateTime($Place['dateDebut']);
+		$date = new DateTime($Setting['dateDebut']);
 			echo 'Le <strong>'.$date->format('d-m-Y'.'</strong> à '.'H:i:s');
 		
 		?></td>
 		<td><?php 
-		$date = new DateTime($Place['dateFin']);
+		$date = new DateTime($Setting['dateFin']);
 			echo 'Le <strong>'.$date->format('d-m-Y'.'</strong> à '.'H:i:s');
-		if($Place['dateDebut']<= date("Y-m-d H:i:s") && $Place['dateFin']>= date("Y-m-d H:i:s"))
+		if($Setting['dateDebut']<= date("Y-m-d H:i:s") && $Setting['dateFin']>= date("Y-m-d H:i:s"))
 			echo "<span class='btn btn-info' > en cours</span>";
 		?></td>		</tr>
 	<?php

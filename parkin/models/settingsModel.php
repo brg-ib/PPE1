@@ -1,7 +1,7 @@
 <?php 
-function liste_settings()
+function liste_settings($bdd)
 {
-	$settings=$bdd->query("Select * from setting");
+	$settings=$bdd->query("Select * from settings");
 	return $settings->fetchALL();
 }
 function details_setting($idPlace)

@@ -21,7 +21,7 @@
 <?php
 function afficher_clients($Clients)
 {
-	?>
+	?><section>
 	      <div class="container">
 	  
         <div class="row">
@@ -31,8 +31,10 @@ function afficher_clients($Clients)
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>Nom</th>
-                <th colspan="2">Opérations</th>
+                <th>Nom & Prénom</th>
+				<th>E-mail</th>
+				<th>Téléphone</th>
+                <th colspan="4">Opérations</th>
             </tr>
         </thead>
         <tbody>
@@ -41,17 +43,21 @@ function afficher_clients($Clients)
 	{
 		?>
 		<tr>
-		<td><a href="index.php?module=clients&action=details&idClient=<?=$Client['idClient']?>"><?= $Client['nomClient'];?></a></td>
-		<td><a href="index.php?module=clients&action=form_update&idClient=<?=$Client['idClient']?>"><i class="fa fa-edit"></i></a></td>
-		<td><a href="index.php?module=clients&action=delete&idClient=<?=$Client['idClient']?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette entrée'));"><i class="fa fa-trash-alt"></i></a></td>
+		<td><a href="index.php?module=clients&action=details&idClient=<?=$Client['idUser']?>"><?=$Client['nomUser']." ".$Client['prenomUser'];?></a></td>
+		<td><?=$Client['mailUser']?>
+		<td><?=$Client['telUser']?>
+		<td><a href="index.php?module=clients&action=form_update&idClient=<?=$Client['idUser']?>"><i class="fa fa-edit"></i></a></td>
+		<td><a href="index.php?module=clients&action=delete&idClient=<?=$Client['idUser']?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette entrée'));"><i class="fa fa-trash-alt"></i></a></td>
 		</tr>
 	<?php
 	}
 	?>
         <tfoot>
             <tr>
-                <th>Nom</th>
-                <th colspan="2">Opérations</th>
+                <th>Nom & Prénom</th>
+				<th>E-mail</th>
+				<th>Téléphone</th>
+                <th colspan="4">Opérations</th>
             </tr>
         </tfoot>
     </table>
@@ -59,13 +65,14 @@ function afficher_clients($Clients)
           </div>
         </div>
       </div>
-	
+	</section>
 	
 	<?php
 } 
 function form_add_client()
 {
 	?>
+	<section>
       <div class="container">
 	  
         <div class="row">
@@ -83,7 +90,7 @@ function form_add_client()
 </div>
 </div>
 </div>
-	
+	</section>
 	<?php
 }
 
@@ -91,6 +98,7 @@ function form_update_client($bdd,$idClient)
 {
 	$Client=get_client($bdd,$idClient);
 	?>
+	<section>
       <div class="container">
 	  
         <div class="row">
@@ -110,6 +118,7 @@ function form_update_client($bdd,$idClient)
 </div>
 </div>
 </div>
+</section>
 	<?php
 }
 function form_details_client($bdd,$idClient)
@@ -118,7 +127,7 @@ function form_details_client($bdd,$idClient)
 		$Clients=details_client($bdd,$idClient);
 
 	?>
-	
+	<section>
 	      <div class="container">
 	  
         <div class="row">
@@ -149,7 +158,7 @@ function form_details_client($bdd,$idClient)
 		<td><a href="index.php?module=clients&action=details&idClient=<?=$Place['idUser']?>">
 		<?php
 		
-		echo $Place['nomUser']." ".$Place['prenomUser']; ?>
+		echo $Place['nomPlace']; ?>
 		</a></td>
 		<td><?php 
 		$date = new DateTime($Place['dateDebut']);
@@ -167,7 +176,7 @@ function form_details_client($bdd,$idClient)
 	?>
         <tfoot>
             <tr>
-                <th>Client</th>
+                <th>Place</th>
 				<th>Date début</th>
 				<th>Date Fin</th> 
             </tr>
@@ -177,12 +186,13 @@ function form_details_client($bdd,$idClient)
           </div>
        
         </div></div></div>		
-	
+	</section>
 	<?php
 }
 function form_connexion()
 {
 	?>
+	<section>
 	 <div class="container">
 
 	<section>      

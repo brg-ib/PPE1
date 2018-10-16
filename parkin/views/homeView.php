@@ -6,7 +6,11 @@
               <strong>Park'in</strong>
 			  <?php 
 			  require_once 'models/clientsModel.php';
-			  if (is_admin()) { ?> <h4>Adminisration</h4> <?php } else {?>  <h4>Résrevez votre place de parking!!</h4> <?php } ?>
+			  if (is_admin()) { ?> <h4>Adminisration</h4> 
+			  
+			  <?php } else {?>  <h4>Résrevez votre place de parking!!</h4> 
+			  
+<?php } ?>
             </h1>
             <hr>
           </div>
@@ -62,7 +66,7 @@
 					 <?php
 					 
 					 require_once 'models/reservationsModel.php';
-					 $nextime=time_next($bdd);
+					 $nextime=time_next($bdd,$_SESSION['id']);
 					 
 					 ?>
 					 </p>
@@ -118,7 +122,7 @@ var x = setInterval(function() {
 					 <?php
 					 
 					 require_once 'models/reservationsModel.php';
-					 $nextime=time_next($bdd);
+					 $nextime=time_next($bdd,$_SESSION['id']);
 					 
 					 ?>
 					 </p>

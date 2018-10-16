@@ -1,7 +1,7 @@
 <?php 
-function liste_clients()
+function liste_clients($bdd)
 {
-	$Users=$bdd->query("Select * from users where etatUser<=2");
+	$Users=$bdd->query("Select * from users where levelUser<3");
 	return $Users->fetchALL();
 }
 function get_client($bdd,$idUser)

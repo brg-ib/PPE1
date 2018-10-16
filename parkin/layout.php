@@ -110,6 +110,8 @@ if (!is_connected())
     <script src="tmp/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="tmp/vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="tmp/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
     <!-- Custom scripts for this tmplate -->
     <script src="tmp/js/creative.min.js"></script>
