@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 04 oct. 2018 à 15:28
+-- Généré le :  mar. 16 oct. 2018 à 02:35
 -- Version du serveur :  10.1.29-MariaDB
 -- Version de PHP :  7.2.0
 
@@ -33,6 +33,13 @@ CREATE TABLE `place` (
   `nomPlace` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `place`
+--
+
+INSERT INTO `place` (`idPlace`, `nomPlace`) VALUES
+(3, 'A03');
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +53,13 @@ CREATE TABLE `reservation` (
   `dateFin` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `reservation`
+--
+
+INSERT INTO `reservation` (`idUser`, `idPlace`, `dateDebut`, `dateFin`) VALUES
+(2, 3, '2018-10-15 00:00:00', '2018-10-26 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -54,11 +68,17 @@ CREATE TABLE `reservation` (
 
 CREATE TABLE `settings` (
   `idSetting` int(11) NOT NULL,
-  `dureeHeuresSetting` int(2) NOT NULL,
-  `dureeMinutesSetting` int(2) NOT NULL,
-  `dureeSecondesSetting` int(2) NOT NULL,
+  `cleSetting` varchar(100) NOT NULL,
+  `valeurSetting` varchar(100) NOT NULL,
   `idUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `settings`
+--
+
+INSERT INTO `settings` (`idSetting`, `cleSetting`, `valeurSetting`, `idUser`) VALUES
+(1, 'duree', '10', 1);
 
 -- --------------------------------------------------------
 
@@ -74,8 +94,16 @@ CREATE TABLE `users` (
   `telUser` int(10) NOT NULL,
   `passwordUser` varchar(50) NOT NULL,
   `levelUser` int(1) NOT NULL DEFAULT '0',
-  `rangUser` int(3) NOT NULL
+  `rangUser` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`idUser`, `nomUser`, `prenomUser`, `mailUser`, `telUser`, `passwordUser`, `levelUser`, `rangUser`) VALUES
+(1, 'MLAGHUI', 'Brahim', 'bmlaghui@gmail.com', 767510038, 'a43b6f0eb955f93b8bb8836b8d0e8dc9de21a1e0', 2, 1),
+(2, 'MLAGHUI', 'Youssef', 'mlaghui@gmail.com', 767510038, 'a43b6f0eb955f93b8bb8836b8d0e8dc9de21a1e0', 3, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -117,19 +145,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `place`
 --
 ALTER TABLE `place`
-  MODIFY `idPlace` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPlace` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `idSetting` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSetting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
@@ -139,7 +167,8 @@ ALTER TABLE `users`
 -- Contraintes pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`),
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`idPlace`) REFERENCES `place` (`idPlace`);
 
 --
 -- Contraintes pour la table `settings`
