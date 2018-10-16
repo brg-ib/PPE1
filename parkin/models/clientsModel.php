@@ -19,11 +19,7 @@ function add_client($nomUser,$prenomUser,$mailUser,$telUser)
 {
 	$reqAddUser=$bdd->query("insert into users(nomUser,prenomUSer,mailUSer,telUser,levelUser) values('".$nomUser."','".$prenomUSer."','".$mailUser."','".$telUser."',0)");
 }
-function historiqueClient($idUser)
-{
-	$Users=$bdd->query("Select * from reservation where idUser=".$idUser);
-	return $Users->fetchALL();
-}
+
 function update_client($nomUser,$prenomUser,$mailUser,$telUser,$idUser)
 {
 	$reqUpdateUser=$bdd->query("update users SET nomUser='".$nomUser."',prenom_user='".$prenomUSer."',mailUser='".$mailUser."',telUser='".$telUser."' where idUser=".$idUser);
@@ -46,12 +42,15 @@ function connecter($bdd,$mailUser,$passwordUser)
 {
 			$reqConnexion=$bdd->query("select * from users where mailUser= '".$mailUser."' and passwordUser=sha1('".$passwordUser."')");
 			$Client=$reqConnexion->fetch();
+			if($Client)
+			{
 			session_start();
 			$_SESSION['connected']=true;
 			$_SESSION['id']=$Client['idUser'];
 			$_SESSION['login']=$Client['nomUser']." ".$Client['prenomUser'];
 			$_SESSION['level']=$Client['levelUser'];
 			return $Client;
+			}
 			
 }
 function deconnecter()
@@ -65,6 +64,17 @@ function is_connected()
 		return true;
 	else
 		return false;
+}
+function historiqueClient($bdd,$idUser)
+{
+	$Place=$bdd->query("Select p.*,r.*,u.* from place p, reservation r, users u where u.idUser= r.idUser and p.idPlace=r.idPlace and u.idUser=".$idUser);
+	return $Place->fetchALL();
+}
+
+function already_reserved ($bdd,$idUser)
+{
+	$reservation=$bdd->query("select p.*,r.* from reservation r, place p where p.idPlace=r.idPlace and dateDebut<=now() and dateFin>=now() and idUser =".$idUser);
+	return $reservation->fetch();
 }
 
 ?>

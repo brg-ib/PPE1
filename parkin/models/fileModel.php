@@ -5,16 +5,17 @@ function liste_file()
 	return $places->fetchALL();
 }
 
-function next_in_file()
+function next_in_file($bdd)
 {
 	$nextPlace=$bdd->query("Select max(rangUser) as last from users where rangUser <> NULL or rangUser <> 0 and levelUser=2");
 	$next=$nextPlace->fetch();
 	return $next['last']+1;
 }
-function add_to_file($idUser)
+function add_to_file($bdd,$idUser)
 {
-	$Place=$bdd->query("update users set rangUser=".next_in_file()." where idUser=".$idUser);
-}
+	$Place=$bdd->query("update users set rangUser=".next_in_file($bdd)." where idUser=".$idUser);
+	
+	}
 
 function delete_from_file($idUser)
 {
@@ -33,9 +34,7 @@ function down_to_file($idUser)
 
 function to_place($idUser)
 {
-	if()
-	{
-	delete_from_file($idUser);
-	}
+	
 }
+
 ?>

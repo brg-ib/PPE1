@@ -125,7 +125,57 @@ function form_details_client($bdd,$idClient)
           <div class="col-lg-8 mx-auto text-center">
 		
 		  		  <h2>Détails du client : <?=$Pl['nomUser']." ".$Pl['prenomUser']?></h2>
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Place</th>
+				<th>Date début</th>
+				<th>Date Fin</th> 
+            </tr>
+        </thead>
+        <tbody>
+		<?php
+		$Places=historiqueClient($bdd,$Pl['idUser']);
+		if (!$Places)
+		{
+		?>
+		<td colspan="4">Pas de réservations</td>
+	<?php }
+	foreach  ($Places as $Place)
+	{
+		?>
+		<tr>
+		
+		<td><a href="index.php?module=clients&action=details&idClient=<?=$Place['idUser']?>">
+		<?php
+		
+		echo $Place['nomUser']." ".$Place['prenomUser']; ?>
+		</a></td>
+		<td><?php 
+		$date = new DateTime($Place['dateDebut']);
+			echo 'Le <strong>'.$date->format('d-m-Y'.'</strong> à '.'H:i:s');
+		
+		?></td>
+		<td><?php 
+		$date = new DateTime($Place['dateFin']);
+			echo 'Le <strong>'.$date->format('d-m-Y'.'</strong> à '.'H:i:s');
+		if($Place['dateDebut']<= date("Y-m-d H:i:s") && $Place['dateFin']>= date("Y-m-d H:i:s"))
+			echo "<span class='btn btn-info' > en cours</span>";
+		?></td>		</tr>
+	<?php
+	}
+	?>
+        <tfoot>
+            <tr>
+                <th>Client</th>
+				<th>Date début</th>
+				<th>Date Fin</th> 
+            </tr>
+        </tfoot>
+    </table>
 
+          </div>
+       
         </div></div></div>		
 	
 	<?php
@@ -133,9 +183,16 @@ function form_details_client($bdd,$idClient)
 function form_connexion()
 {
 	?>
-	<section>
 	 <div class="container">
-        <div class="row">
+
+	<section>      
+<?php if(isset($_GET['erreur'])) {
+	?>
+	<div class="alert alert-danger" role="alert">
+  <strong><i class="fa fa-exclamation-circle"></i> ACHTUNG</strong> , Votre login ou mot de passe est incorrect
+</div>
+<?php }?>
+	<div class="row">
           <div class="col-lg-8 mx-auto text-center">
 	<form>
   <div class="form-group">

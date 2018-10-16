@@ -9,12 +9,28 @@ function details_reservation($idUser,$idPlace,$dateDebut)
 	$reservation=$bdd->query("Select * from reservation where idUser=".$idReservation." and idPlace=".$idPlace." and dateDebut=".$dateDebut);
 	return $reservation->fetch();
 }
-function add_reservation($idUser,$idPlace,$dateDebut,$dateFin)
+function add_reservation($bdd,$idUser,$idPlace)
 {
-	$reqAddreservation=$bdd->query("insert into reservation(nomreservation) values('".$nomreservation."')");
-}
+	$reqDuree=$bdd->query("Select valeurSetting as duree from settings where cleSetting='duree'");
+	$duree=$reqDuree->fetch();
+	$reqDateFin=$bdd->query("SELECT DATE_ADD(now(), INTERVAL ".$duree['duree']." DAY) as dateFin");
+	$dateFinReservation=$reqDateFin->fetch();
+	$reqAddreservation=$bdd->query("insert into reservation(idUser,idPlace,dateDebut,dateFin) values(".$idUser.",".$idPlace.",now(),'".$dateFinReservation['dateFin']."')");
+	var_dump($reqAddreservation);
+	}
 function delete_reservation($idUser,$idPlace,$dateDebut)
 {
 			$reqDeletereservation=$bdd->query("delete from reservation where idUser=".$idReservation." and idPlace=".$idPlace." and dateDebut=".$dateDebut);
+}
+function reservations_now($bdd)
+{
+	$reservation=$bdd->query("Select p.idPlace from place p where p.idPlace not in (select idPlace from reservation where dateDebut<=now() and dateFin>=now())");
+	return $reservation->fetchALL();
+}
+
+function time_next($bdd)
+{
+	$reservation=$bdd->query("Select max(dateFin) as dateFin from reservation where dateDebut<=now() and dateFin>=now()");
+	return $reservation->fetch();
 }
 ?>

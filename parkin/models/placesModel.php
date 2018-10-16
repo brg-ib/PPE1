@@ -28,4 +28,10 @@ function delete_place($bdd,$idPlace)
 {
 	$reqDeletePlace=$bdd->query("delete from place where idPlace=".$idPlace);
 }
+function places_dispo ($bdd)
+{
+	$Places=$bdd->query("SELECT * from place where idPlace not in (SELECT idPlace from reservation where dateDebut <= now() and dateFin >= now())");
+	return $Places->fetchALL();
+
+}
 ?>

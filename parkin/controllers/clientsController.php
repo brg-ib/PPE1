@@ -16,7 +16,7 @@ switch($action)
 	case 'update':$idClient=$_GET['idClient']; $nomClient=$_REQUEST['nomClient'];  update_client($bdd,$nomClient,$idClient);  header('Location:index.php?module=clients'); break;
 	case 'delete': $idClient=$_GET['idClient']; delete_client($bdd,$idClient); break;
 	case 'form_connexion' : form_connexion(); break;
-	case 'connexion' : $mailUser=$_REQUEST['mailUser']; $passwordUser=$_REQUEST['passwordUser']; if(connecter($bdd,$mailUser,$passwordUser)) { header('Location:index.php'); } else {header('Location:index.php?module=clients&action=form_connexion');} break;
+	case 'connexion' : $mailUser=$_REQUEST['mailUser']; $passwordUser=$_REQUEST['passwordUser']; if(connecter($bdd,$mailUser,$passwordUser)) { header('Location:index.php'); } else {header('Location:index.php?module=clients&action=form_connexion&erreur=true');} break;
 	case 'deconnexion':deconnecter();  header('Location:index.php'); break;
 
 	}
