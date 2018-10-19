@@ -1,4 +1,4 @@
-<?php 
+<?php
 function liste_clients()
 {
 	$Users=$bdd->query("Select * from users where etatUser<=2");
@@ -31,7 +31,7 @@ function activate_client($id_user)
 function desactivate_client($id_user)
 {
 		$reqUpdateUser=$bdd->query("update users SET levelUser=0");
-		
+
 }
 function delete_client($idUser)
 {
@@ -51,7 +51,7 @@ function connecter($bdd,$mailUser,$passwordUser)
 			$_SESSION['level']=$Client['levelUser'];
 			return $Client;
 			}
-			
+
 }
 function deconnecter()
 {
@@ -65,6 +65,11 @@ function is_connected()
 	else
 		return false;
 }
+
+function inscription(){
+
+}
+
 function historiqueClient($bdd,$idUser)
 {
 	$Place=$bdd->query("Select p.*,r.*,u.* from place p, reservation r, users u where u.idUser= r.idUser and p.idPlace=r.idPlace and u.idUser=".$idUser);
