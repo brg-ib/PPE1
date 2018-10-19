@@ -1,15 +1,16 @@
 <?php
- function connexion_bd()
-{
-	global $bdd;
-		try//connexion à la bdd
-	{
-		$bdd = new PDO("mysql:host=localhost;dbname=parkin; charset=utf8","root","");
-	}
-	catch(Exception $e)
-	{
-		die("bdd non trouvée");
-	}
+require('config.php');
+
+//connexion à la bdd
+ function connexion_bd(){
+		try
+	      {
+		     $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $password);
+	      }
+        catch(PDOException $e){
+          echo 'Connexion échouée : '.$e->getMessage();
+          die();
+        }
 }
 
 function is_admin()

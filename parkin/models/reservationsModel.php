@@ -20,7 +20,7 @@ function add_reservation($bdd,$idUser,$idPlace)
 	}
 function delete_reservation($idUser,$idPlace,$dateDebut)
 {
-			$reqDeletereservation=$bdd->query("delete from reservation where idUser=".$idReservation." and idPlace=".$idPlace." and dateDebut=".$dateDebut);
+			$reqDeletereservation=$bdd->query("delete from reservation where idUser=".$idUser." and idPlace=".$idPlace." and dateDebut=".$dateDebut);
 }
 function reservations_now($bdd)
 {
@@ -50,5 +50,11 @@ function time_next($bdd,$idUser)
 	
 	return $date_next;
 	
+}
+
+function verifier($bdd)
+{
+	$Reservations=$bdd->query("select * from reservation where dateDebut<=now() and dateFin>=now()");
+	return $Reservations->fetchALL();
 }
 ?>
