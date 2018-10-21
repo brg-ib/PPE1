@@ -2,7 +2,7 @@
 session_start();	
 
 require_once('models/homeModel.php');
-connexion_bd();
+connexion_bd($host,$dbname,$user,$password);
 
 	$baseURL=dirname($_SERVER['SCRIPT_NAME']);
 

@@ -16,11 +16,10 @@ function add_reservation($bdd,$idUser,$idPlace)
 	$reqDateFin=$bdd->query("SELECT DATE_ADD(now(), INTERVAL ".$duree['duree']." DAY) as dateFin");
 	$dateFinReservation=$reqDateFin->fetch();
 	$reqAddreservation=$bdd->query("insert into reservation(idUser,idPlace,dateDebut,dateFin) values(".$idUser.",".$idPlace.",now(),'".$dateFinReservation['dateFin']."')");
-	var_dump($reqAddreservation);
 	}
 function delete_reservation($idUser,$idPlace,$dateDebut)
 {
-			$reqDeletereservation=$bdd->query("delete from reservation where idUser=".$idUser." and idPlace=".$idPlace." and dateDebut=".$dateDebut);
+			$reqDeletereservation=$bdd->query("delete from reservation where idUser=".$idReservation." and idPlace=".$idPlace." and dateDebut=".$dateDebut);
 }
 function reservations_now($bdd)
 {
@@ -35,7 +34,7 @@ function time_next($bdd,$idUser)
 	
 	
 	
-	$reservation=$bdd->query("Select max(dateFin) as dateFin from reservation where dateDebut<=now() and dateFin>=now()");
+	$reservation=$bdd->query("Select max(dateDebut) as dateDebut from reservation where dateDebut<=now() and dateFin>=now()");
 	$Last=$reservation->fetch();
 	
 	
@@ -45,13 +44,12 @@ function time_next($bdd,$idUser)
 	
 	
 	
-		$reqDateFin=$bdd->query("SELECT DATE_ADD('".$Last['dateFin']."', INTERVAL ".$duree['duree']*$rangUser." DAY) as dateFin");
+		$reqDateFin=$bdd->query("SELECT DATE_ADD('".$Last['dateDebut']."', INTERVAL ".$duree['duree']*$rangUser." DAY) as dateDebut");
 		$date_next=$reqDateFin->fetch();
 	
 	return $date_next;
 	
 }
-
 function verifier($bdd)
 {
 	$Reservations=$bdd->query("select * from reservation where dateDebut<=now() and dateFin>=now()");

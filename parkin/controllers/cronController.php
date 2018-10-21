@@ -1,5 +1,10 @@
 <?php
 include 'models/cronModel.php';
 //refresh_reservations();
-refresh_file($bdd);
+$action=$_GET['action'];
+switch($action)
+{
+	case 'refresh_file': refresh_file($bdd); break;
+}
+
 ?>

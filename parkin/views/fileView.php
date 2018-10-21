@@ -26,6 +26,7 @@ function afficher_file($bdd,$Elements)
             <tr>
                 <th>Rang</th>
 				<th>Client</th>
+				<th>Date prévue</th>
 				<th>Temps d'attente</th>
                 <th colspan="3">Opérations</th>
             </tr>
@@ -39,16 +40,19 @@ function afficher_file($bdd,$Elements)
 		<tr>
 		<td><?=$Element['rangUser']?></td>
 		<td><?=$Element['nomUser']." ".$Element['prenomUser']?></td>
+		<td><?php
+					 $nextime=time_next($bdd,$Element['idUser']);
+					$date = new DateTime($nextime['dateDebut']);
+			echo 'Le <strong>'.$date->format('d-m-Y'.'</strong> à '.'H:i:s');
+				
+	?></td>
 		<td>
 					 <span id="rebous<?=$Element['rangUser']?>"></span>
-		<?php
-					 $nextime=time_next($bdd,$Element['idUser']);
-					
-	?>
+		
 
 		<script>
 // Set the date we're counting down to
-var countDownDate<?=$Element['rangUser']?> = new Date("<?=$nextime['dateFin'];?>").getTime();
+var countDownDate<?=$Element['rangUser']?> = new Date("<?=$nextime['dateDebut'];?>").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -60,7 +64,7 @@ var x = setInterval(function() {
   var distance<?=$Element['rangUser']?> = countDownDate<?=$Element['rangUser']?> - now;
 
   // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance<?=$Element['rangUser']?> / (1000 * 60 * 60 * 24));
+  var days = Math.floor((distance<?=$Element['rangUser']?>) / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance<?=$Element['rangUser']?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance<?=$Element['rangUser']?> % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance<?=$Element['rangUser']?> % (1000 * 60)) / 1000);
@@ -96,6 +100,7 @@ var x = setInterval(function() {
             <tr>
                 <th>Rang</th>
 				<th>Client</th>
+				<th>Date prévue</th>
 				<th>Temps d'attente</th>
                 <th colspan="3">Opérations</th>
             </tr>

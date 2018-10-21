@@ -38,8 +38,7 @@ function afficher_places($bdd,$Places)
 		<tr>
 		<td><a href="index.php?module=places&action=details&idPlace=<?=$Place['idPlace']?>"><?= $Place['nomPlace'];?></a></td>
 		<td><?php
-				$P=details_place($bdd,$Place['idPlace']);
-				
+				$P=actual_place($bdd,$Place['idPlace']);
 				if(($P) &&($P[0]['dateDebut']<= date("Y-m-d H:i:s")) && ($P[0]['dateFin']>= date("Y-m-d H:i:s"))){
 				echo "<span class='btn btn-danger' >Occupée par <strong>".$P[0]['nomUser']." ".$P[0]['prenomUser']."</strong></span>";}
 				else{

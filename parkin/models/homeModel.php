@@ -2,9 +2,10 @@
 require('config.php');
 
 //connexion à la bdd
- function connexion_bd(){
+ function connexion_bd($host,$dbname,$user,$password){
 		try
 	      {
+			  global $bdd;
 		     $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $password);
 	      }
         catch(PDOException $e){

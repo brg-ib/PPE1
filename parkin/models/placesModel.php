@@ -15,6 +15,12 @@ function details_place($bdd,$idPlace)
 	$Place=$bdd->query("Select p.*,r.*,u.* from place p, reservation r, users u where u.idUser= r.idUser and p.idPlace=r.idPlace and r.idPlace=".$idPlace);
 	return $Place->fetchALL();
 }
+function actual_place($bdd,$idPlace)
+{
+	$Place=$bdd->query("Select p.*,r.*,u.* from place p, reservation r, users u where u.idUser= r.idUser and p.idPlace=r.idPlace and r.idPlace=".$idPlace." and dateDebut<=now() and dateFin>=now()");
+	return $Place->fetchALL();
+}
+
 function add_place($bdd,$nomPlace)
 {
 	echo "add place-> Model";

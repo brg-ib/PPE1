@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
   <head>
 
@@ -49,7 +49,7 @@ require_once 'models/clientsModel.php';
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="index.php">Acceuil</a>
             </li>
-
+			
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="index.php?module=places">Places</a>
             </li>
@@ -69,7 +69,7 @@ require_once 'models/clientsModel.php';
 			<li class="nav-item right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 			<li class="nav-item">
               <?php
-
+			  	
 if (!is_connected())
 	{
 		?>
@@ -80,10 +80,10 @@ if (!is_connected())
 		  </li>
 			<li class="nav-item">
    <?php
-
+			  	
 if (!is_connected())
 	{
-		?>
+		?>             
 			 <a class="nav-link js-scroll-trigger btn btn-danger" href="index.php?module=home&action=form_inscription"><span class="label label-warning">Inscription</span></a>
 <?php
 	} else
@@ -115,7 +115,7 @@ if (!is_connected())
 
     <!-- Custom scripts for this tmplate -->
     <script src="tmp/js/creative.min.js"></script>
-
+	
 	<script>
 	$(document).ready(function() {
     $('#example').DataTable();
