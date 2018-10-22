@@ -15,25 +15,27 @@ function details_client($bdd,$idUser)
 	return $Users->fetchALL();
 }
 
-function add_client($nomUser,$prenomUser,$mailUser,$telUser)
+function ajouter_client($nomUser,$prenomUser,$mailUser,$passwordUser,$telUser,$bdd)
 {
-	$reqAddUser=$bdd->query("insert into users(nomUser,prenomUSer,mailUSer,telUser,levelUser) values('".$nomUser."','".$prenomUSer."','".$mailUser."','".$telUser."',0)");
+	$reqAddUser=$bdd->query("insert into users(nomUser,prenomUser,mailUser,telUser,passwordUser) values('".$nomUser."','".$prenomUser."','".$mailUser."','".$telUser."',sha1('".$passwordUser."'))");
 }
 
-function update_client($nomUser,$prenomUser,$mailUser,$telUser,$idUser)
+
+
+function update_client($nomUser,$prenomUser,$mailUser,$telUser,$passwordUser,$idUser,$bdd)
 {
-	$reqUpdateUser=$bdd->query("update users SET nomUser='".$nomUser."',prenom_user='".$prenomUSer."',mailUser='".$mailUser."',telUser='".$telUser."' where idUser=".$idUser);
+	$reqUpdateUser=$bdd->query("update users SET nomUser='".$nomUser."',prenom_user='".$prenomUser."',mailUser='".$mailUser."',telUser='".$telUser."',passwoedUser='sha1(".$passwordUser.")' where idUser=".$idUser);
 }
-function activate_client($id_user)
+function activate_client($bdd,$idUser)
 {
-		$reqUpdateUser=$bdd->query("update users SET levelUser=1");
+		$reqUpdateUser=$bdd->query("update users SET levelUser=2 where idUser=".$idUser);
 }
-function desactivate_client($id_user)
+function desactivate_client($bdd,$idUser)
 {
-		$reqUpdateUser=$bdd->query("update users SET levelUser=0");
+		$reqUpdateUser=$bdd->query("update users SET levelUser=1 where idUser=".$idUser);
 		
 }
-function delete_client($idUser)
+function delete_client($bdd,$idUser)
 {
 			$reqDeleteUser=$bdd->query("delete from users where idUser=".$idUser);
 }

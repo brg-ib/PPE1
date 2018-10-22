@@ -1,15 +1,9 @@
 <?php
- function refresh_reservations($bdd)
- {
-	 //$reqUpdateReservation=$bdd->query("delete from reservation where idUser=".$idUser." and idPlace=".$idPlace." and dateDebut=".$dateDebut);
-
-	 
- }
 function refresh_file($bdd)
  {
 require_once 'models/reservationsModel.php';
-$Reservations=verifier($bdd);
-if(!$Reservations)
+$Reservations=reservations_now($bdd);
+if($Reservations)
 {
 	$reqFistinFile=$bdd->query("select idUser from users where rangUser=1 Limit 0,1");
 	$First=$reqFistinFile->fetch();
@@ -21,10 +15,9 @@ if(!$Reservations)
 	$dateFinReservation=$reqDateFin->fetch();
 	$reqAddreservation=$bdd->query("insert into reservation(idUser,idPlace,dateDebut,dateFin) values(".$First['idUser'].",".$FirstPlace['idPlace'].",now(),'".$dateFinReservation['dateFin']."')");
 	$reqUpdateFile=$bdd->query("update users set rangUser=NULL where idUser=".$First['idUser']);
-	$reqUpdateReservation=;
+	$reqUpdateUsers=$bdd->query("update users set rangUser=rangUser-1 where rangUser<>NULL and rangUser>1 and idUser<>".$First['idUser']);
 }
+ 
  }
- 
- 
 
 ?>

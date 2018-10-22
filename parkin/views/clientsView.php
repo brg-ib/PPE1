@@ -34,7 +34,7 @@ function afficher_clients($Clients)
                 <th>Nom & Prénom</th>
 				<th>E-mail</th>
 				<th>Téléphone</th>
-                <th colspan="4">Opérations</th>
+                <th colspan="3">Opérations</th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +48,16 @@ function afficher_clients($Clients)
 		<td><?=$Client['telUser']?>
 		<td><a href="index.php?module=clients&action=form_update&idClient=<?=$Client['idUser']?>"><i class="fa fa-edit"></i></a></td>
 		<td><a href="index.php?module=clients&action=delete&idClient=<?=$Client['idUser']?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette entrée'));"><i class="fa fa-trash-alt"></i></a></td>
+		<td>
+		
+		<?php
+		if($Client['levelUser']==1) { ?>
+			<a href="index.php?module=clients&action=activate&idUser=<?=$Client['idUser']?>" alt="Activer"><i class="fa fa-check-circle"></i></a>
+			<?php
+		}
+		else if($Client['levelUser']==2) { ?> <a href="index.php?module=clients&action=desactivate&idUser=<?=$Client['idUser']?>" alt="Désactiver"><i class="fa fa-user-slash"></i></a>
+		<?php } ?>
+		</td>
 		</tr>
 	<?php
 	}
@@ -57,7 +67,7 @@ function afficher_clients($Clients)
                 <th>Nom & Prénom</th>
 				<th>E-mail</th>
 				<th>Téléphone</th>
-                <th colspan="4">Opérations</th>
+                <th colspan="3">Opérations</th>
             </tr>
         </tfoot>
     </table>
@@ -73,25 +83,39 @@ function form_add_client()
 {
 	?>
 	<section>
-      <div class="container">
-	  
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-		  <h2>Ajouter une client</h2>
+	 <div class="container">
+
+	<section>      
+
+	<div class="row">
+          <div class="col-lg-8 mx-auto text-center">
 	<form>
   <div class="form-group">
-    <label for="nomUser">Nom</label>
-    <input type="text" class="form-control"  clientholder="Nom de la client" name="nomClient">
+    <label for="email">Nom:</label>
+    <input type="input" class="form-control" id="email" name="nomUser">
   </div>
- <input type="submit" class="btn btn-primary" name="ajouter" value="Ajouter" />
-	 <input type="hidden" name="module" value="clients" />
-	<input type="hidden" name="action" value="add" />
+  <div class="form-group">
+    <label for="pwd">Prénom:</label>
+    <input type="input" class="form-control" id="pwd" name="prenomUser">
+  </div>
+  <div class="form-group">
+    <label for="pwd">E-mail:</label>
+    <input type="email" class="form-control" id="pwd" name="mailUser">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Mot de passe:</label>
+    <input type="password" class="form-control" id="pwd" name="passwordUser">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Téléphone:</label>
+    <input type="input" class="form-control" id="pwd" name="telUser">
+  </div>
+  <button type="submit" class="btn btn-primary">S'inscrire</button>
+  <input type="hidden" name="module" value="clients" />
+  <input type="hidden" name="action" value="add" />
 </form>
-</div>
-</div>
-</div>
-	</section>
-	<?php
+</div></div></div></section>
+		<?php
 }
 
 function form_update_client($bdd,$idClient)
@@ -99,26 +123,39 @@ function form_update_client($bdd,$idClient)
 	$Client=get_client($bdd,$idClient);
 	?>
 	<section>
-      <div class="container">
-	  
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-		  		  <h2>Modifier une client : <?=$Client['nomClient']?></h2>
+	 <div class="container">
 
+	<section>      
+
+	<div class="row">
+          <div class="col-lg-8 mx-auto text-center">
 	<form>
   <div class="form-group">
-    <label for="nomUser">Nom</label>
-    <input type="text" class="form-control"  clientholder="Nom de la client" name="nomClient" value="<?= $Client['nomClient']; ?>" />
+    <label for="email">Nom:</label>
+    <input type="input" class="form-control" id="email" name="nomUser" value="<?=$Client['nomUser']?>">
   </div>
- <input type="submit" class="btn btn-primary" name="ajouter" value="Modifier" />
-	 <input type="hidden" name="module" value="clients" />
-	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="idClient" value="<?= $idClient; ?>" />
+  <div class="form-group">
+    <label for="pwd">Prénom:</label>
+    <input type="input" class="form-control" id="pwd" name="prenomUser" value="<?=$Client['prenomUser']?>">
+  </div>
+  <div class="form-group">
+    <label for="pwd">E-mail:</label>
+    <input type="email" class="form-control" id="pwd" name="mailUser" value="<?=$Client['mailUser']?>">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Mot de passe:</label>
+    <input type="password" class="form-control" id="pwd" name="passwordUser" value="<?=$Client['passwordUser']?>">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Téléphone:</label>
+    <input type="input" class="form-control" id="pwd" name="telUser" value="<?=$Client['telUser']?>">
+  </div>
+  <button type="submit" class="btn btn-primary">Modifier</button>
+  <input type="hidden" name="module" value="clients" />
+  <input type="hidden" name="action" value="update" />
+  <input type="hidden" name="idUser" value="<?=$Client['idUser'];?>" />
 </form>
-</div>
-</div>
-</div>
-</section>
+</div></div></div></section>
 	<?php
 }
 function form_details_client($bdd,$idClient)
@@ -187,6 +224,44 @@ function form_details_client($bdd,$idClient)
        
         </div></div></div>		
 	</section>
+	<?php
+}
+function form_inscription()
+{
+	?>
+	<section>
+	 <div class="container">
+
+	<section>      
+
+	<div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+	<form>
+  <div class="form-group">
+    <label for="email">Nom:</label>
+    <input type="input" class="form-control" id="email" name="nomUser">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Prénom:</label>
+    <input type="input" class="form-control" id="pwd" name="prenomUser">
+  </div>
+  <div class="form-group">
+    <label for="pwd">E-mail:</label>
+    <input type="email" class="form-control" id="pwd" name="mailUser">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Mot de passe:</label>
+    <input type="password" class="form-control" id="pwd" name="passwordUser">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Téléphone:</label>
+    <input type="password" class="form-control" id="pwd" name="telUser">
+  </div>
+  <button type="submit" class="btn btn-primary">S'inscrire</button>
+  <input type="hidden" name="module" value="clients" />
+  <input type="hidden" name="action" value="add" />
+</form>
+</div></div></div></section>
 	<?php
 }
 function form_connexion()

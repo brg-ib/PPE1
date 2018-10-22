@@ -25,6 +25,8 @@ connexion_bd($host,$dbname,$user,$password);
 	ob_end_clean(); // relance l'affichage
 	
 	include "layout.php";
+	require_once 'controllers/cronController.php';
+	refresh_file($bdd);
 	
 
 ?>

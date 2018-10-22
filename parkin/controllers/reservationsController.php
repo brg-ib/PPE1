@@ -1,13 +1,13 @@
 <?php
 require_once 'models/reservationsModel.php';
-//include 'views/reservationsView.php';
+include 'views/reservationsView.php';
 if(isset($_GET['action']))
 {$action=$_GET['action'];}
 else
-{$action='liste';}
+{$action='afficher';}
 switch($action)
 {
-	case 'liste':$Places=liste_reservations($bdd); afficher_reservations($Places); break;
+	case 'afficher':$Places=liste_reservations($bdd); afficher($bdd,$Places); break;
 	case 'form_add': $idUser=$_REQUEST['idUser']; $idPlace=$_REQUEST['idPlace']; add_reservation($bdd,$idUser,$idPlace); break;
 	case 'add': $idPlace=$_REQUEST['idPlace']; $idUser=$_REQUEST['idUser']; add_reservation($bdd,$idUser,$idPlace);  header('Location: index.php');  break;
 	case 'details':$idPlace=$_GET['idPlace']; form_details_reservation($bdd,$idPlace); break;

@@ -1,7 +1,7 @@
 <?php 
-function liste_reservations()
+function liste_reservations($bdd)
 {
-	$reservations=$bdd->query("Select * from reservation");
+	$reservations=$bdd->query("Select u.*,r.* from reservation r, users u where u.idUser=r.idUser");
 	return $reservations->fetchALL();
 }
 function details_reservation($idUser,$idPlace,$dateDebut)
@@ -25,6 +25,30 @@ function reservations_now($bdd)
 {
 	$reservation=$bdd->query("Select p.idPlace from place p where p.idPlace not in (select idPlace from reservation where dateDebut<=now() and dateFin>=now())");
 	return $reservation->fetchALL();
+}
+
+function time_2next($bdd,$idUser)
+{
+	$reqDuree=$bdd->query("Select valeurSetting as duree from settings where cleSetting='duree'");
+	$duree=$reqDuree->fetch();
+	
+	
+	
+	$reservation=$bdd->query("Select max(dateDebut) as dateDebut from reservation where dateDebut<=now() and dateFin>=now()");
+	$Last=$reservation->fetch();
+	
+	
+	require_once 'models/clientsModel.php';
+	$User=get_client($bdd,$idUser);
+	$rangUser=$User['rangUser'];
+	
+	
+	
+		$reqDateFin=$bdd->query("SELECT DATE_ADD('".$Last['dateDebut']."', INTERVAL ".$duree['duree']." DAY) as dateDebut");
+		$date_next=$reqDateFin->fetch();
+	
+	return $date_next;
+	
 }
 
 function time_next($bdd,$idUser)
@@ -52,7 +76,13 @@ function time_next($bdd,$idUser)
 }
 function verifier($bdd)
 {
-	$Reservations=$bdd->query("select * from reservation where dateDebut<=now() and dateFin>=now()");
+	$Reservations=$bdd->query("select idPlace from reservation where dateDebut<=now() and dateFin>=now()");
+	return $Reservations->fetchALL();
+}
+
+function is_oc($bdd,$idPlace)
+{
+	$Reservations=$bdd->query("select idPlace from reservation where dateDebut<=now() and dateFin>=now() and idPlace=".$idPlace);
 	return $Reservations->fetchALL();
 }
 ?>

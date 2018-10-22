@@ -84,7 +84,7 @@ if (!is_connected())
 if (!is_connected())
 	{
 		?>             
-			 <a class="nav-link js-scroll-trigger btn btn-danger" href="index.php?module=home&action=form_inscription"><span class="label label-warning">Inscription</span></a>
+			 <a class="nav-link js-scroll-trigger btn btn-danger" href="index.php?module=clients&action=form_inscription"><span class="label label-warning">Inscription</span></a>
 <?php
 	} else
 	{ ?>
