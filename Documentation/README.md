@@ -17,19 +17,17 @@
 ### Fonctionnalités + Urls
 
 Front-End : /index.php
-  - Inscription - /inscription.php 
-  - Connexion -/connexion.php
-  - Profil - /profil.php
-  - Réserver une place - /reserver.php
+  - Inscription - /index.php?module=clients&action=form_inscription
+  - Connexion -/index.php?module=clients&action=form_connexion
 
 
-Back-End: /admin (folder)
-  - Profil - /admin/profil.php
-  - Gérer les places - /admin/place.php
-  - Gérer les clients - /admin/client.php
-  - Gérer la file d'attente - /admin/file.php
-  - Gérer les inscriptions - /admin/inscription.php
-  - Parametre général - /settings.php
+
+Back-End: /index.php
+  - Profil - index.php?module=clients&action=details&idClient
+  - Gérer les places - index.php?module=places
+  - Gérer les clients - index.php?module=clients
+  - Gérer les reservations - index.php?module=reservations
+  - Parametre général - index.php?module=settings
 
   
 ### Language / Framework utilisés
