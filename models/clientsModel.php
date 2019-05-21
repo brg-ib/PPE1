@@ -6,26 +6,30 @@ function liste_clients($bdd)
 }
 function get_client($bdd,$idUser)
 {
-	$User=$bdd->query("Select * from users where idUser=".$idUser);
+	$User=$bdd->prepare("Select * from users where idUser=?");
+	$User->execute(array($idUser));
 	return $User->fetch();
 }
 function details_client($bdd,$idUser)
 {
-	$Users=$bdd->query("Select u.*,r.* from users u, reservation r where u.idUser=r.idUser and r.idUser=".$idUser);
+	$Users=$bdd->prepare("Select u.*,r.* from users u, reservation r where u.idUser=r.idUser and r.idUser=?");
+	$Users->execute(array($idUser));
 	return $Users->fetchALL();
 }
 
 function ajouter_client($nomUser,$prenomUser,$mailUser,$passwordUser,$telUser,$bdd)
 {
-	$reqAddUser=$bdd->query("insert into users(nomUser,prenomUser,mailUser,telUser,passwordUser) values('".$nomUser."','".$prenomUser."','".$mailUser."','".$telUser."',sha1('".$passwordUser."'))");
-}
+	$reqAddUser=$bdd->prepare("insert into users(nomUser,prenomUser,mailUser,telUser,passwordUser) values(?,?,?,?,sha1(?))");
+	$reqAddUser->execute(array($nomUser,$prenomUser,$mailUser,$telUser,$passwordUser));
+	}
 
 
 
 function update_client($nomUser,$prenomUser,$mailUser,$telUser,$passwordUser,$idUser,$bdd)
 {
-	$reqUpdateUser=$bdd->query("update users SET nomUser='".$nomUser."',prenom_user='".$prenomUser."',mailUser='".$mailUser."',telUser='".$telUser."',passwoedUser='sha1(".$passwordUser.")' where idUser=".$idUser);
-}
+	$reqUpdateUser=$bdd->prepare("update users SET nomUser=?,prenom_user=?,mailUser=?,telUser=?,passwordUser=sha1(?) where idUser=?");
+	$reqUpdateUser->execute(array($nomUser,$prenomUser,$mailUser,$telUser,$passwordUser,$idUser));
+	}
 function activate_client($bdd,$idUser)
 {
 		$reqUpdateUser=$bdd->query("update users SET levelUser=2 where idUser=".$idUser);
@@ -42,10 +46,11 @@ function delete_client($bdd,$idUser)
 
 function connecter($bdd,$mailUser,$passwordUser)
 {
-			$reqConnexion=$bdd->query("select * from users where mailUser= '".$mailUser."' and passwordUser=sha1('".$passwordUser."')");
-			$Client=$reqConnexion->fetch();
-			if($Client)
-			{
+			$reqConnexion=$bdd->prepare("select * from users where mailUser= ? and passwordUser=sha1(?)");
+			$reqConnexion->execute(array($mailUser,$passwordUser));
+			$Client=$reqConnexion->fetch();		
+
+			if ($Client) {
 			session_start();
 			$_SESSION['connected']=true;
 			$_SESSION['id']=$Client['idUser'];

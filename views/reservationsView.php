@@ -27,7 +27,6 @@ function afficher($bdd,$Elements)
 				<th>Client</th>
 				<th>Date Début</th>
 				<th>Date fin</th>
-                <th>Etat</th>
             </tr>
         </thead>
         <tbody>
@@ -40,16 +39,7 @@ function afficher($bdd,$Elements)
 		<td><a href="index.php?module=clients&action=details&idClient=<?=$Element['idUser']?>"><?=$Element['nomUser']." ".$Element['prenomUser']?></a></td>
 		<td><?=$Element['dateDebut']?></td>
 		<td><?=$Element['dateFin']?></td>
-		<td>
-		<?php
-		require_once 'models/placesModel.php';
-		$P=actual_place($bdd,$Element['idPlace']);
-				if(($P) &&($P[0]['dateDebut']<= date("Y-m-d H:i:s")) && ($P[0]['dateFin']>= date("Y-m-d H:i:s"))){
-				echo "<span class='btn btn-danger' >Occupée</span>";}
-				else{
-			echo "<span class='btn btn-success' >Libre</span>";}
-		?>
-		</td>
+		
 		</tr>
 	<?php
 		}}
@@ -61,7 +51,6 @@ function afficher($bdd,$Elements)
                 <th>Client</th>
 				<th>Date Début</th>
 				<th>Date fin</th>
-				<th>Etat</th>
             </tr>
         </tfoot>
     </table>

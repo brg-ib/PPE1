@@ -5,7 +5,7 @@ require('config.php');
  function connexion_bd($host,$dbname,$user,$password){
 		try
 	      {
-			  global $bdd;
+			 global $bdd;
 		     $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $password);
 	      }
         catch(PDOException $e){

@@ -7,8 +7,8 @@ else
 {$action='liste';}
 switch($action)
 {
-	case 'liste':$Clients=liste_clients($bdd); afficher_clients($Clients); break;
-	case 'form_add': form_add_client(); break;
+	case 'liste':if ($_SESSION['connected'] && $_SESSION['level']==3) { $Clients=liste_clients($bdd); afficher_clients($Clients);} else { header('Location:index.php?module=404');}; break;
+	case 'form_add': if ($_SESSION['connected'] && $_SESSION['level']==3) { form_add_client(); } else { header('Location:index.php?module=404');}; break;
 	case 'form_inscription': form_inscription(); break;
 	case 'get':$idClient=$_GET['idClient']; get_client($bdd,$idClient); break;
 	case 'add': $nomUser=$_REQUEST['nomUser']; $prenomUser=$_REQUEST['prenomUser']; $telUser=$_REQUEST['telUser']; $passwordUser=$_REQUEST['passwordUser']; $mailUser=$_REQUEST['mailUser']; ajouter_client($nomUser,$prenomUser,$mailUser,$passwordUser,$telUser,$bdd); header('Location:index.php?module=clients');   break;
@@ -19,8 +19,8 @@ switch($action)
 	case 'form_connexion' : form_connexion(); break;
 	case 'connexion' : $mailUser=$_REQUEST['mailUser']; $passwordUser=$_REQUEST['passwordUser']; if(connecter($bdd,$mailUser,$passwordUser)) { header('Location:index.php'); } else {header('Location:index.php?module=clients&action=form_connexion&erreur=true');} break;
 	case 'deconnexion':deconnecter();  header('Location:index.php');  header('Location:index.php'); break;
-	case 'activate':$idUser=$_REQUEST['idUser']; activate_client($bdd,$idUser);  header('Location:index.php?module=clients'); break;
-	case 'desactivate':$idUser=$_REQUEST['idUser']; desactivate_client($bdd,$idUser);  header('Location:index.php?module=clients'); break;
+	case 'activate': if ($_SESSION['connected'] && $_SESSION['level']==3) {$idUser=$_REQUEST['idUser']; activate_client($bdd,$idUser);   header('Location:index.php?module=clients'); } else { header('Location:index.php?module=404');}; break;
+	case 'desactivate':if ($_SESSION['connected'] && $_SESSION['level']==3) {$idUser=$_REQUEST['idUser']; desactivate_client($bdd,$idUser);  header('Location:index.php?module=clients'); } else { header('Location:index.php?module=404');}; break;
 
 	}
  ?>

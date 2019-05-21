@@ -100,7 +100,8 @@ function form_add_client()
   </div>
   <div class="form-group">
     <label for="pwd">E-mail:</label>
-    <input type="email" class="form-control" id="pwd" name="mailUser">
+    <input type="email" class="form-control" id="username" name="mailUser">
+	<script type="text/javascript" src="tmp/js/login_validator.js" />
   </div>
   <div class="form-group">
     <label for="pwd">Mot de passe:</label>
@@ -231,6 +232,7 @@ function form_inscription()
 	?>
 	<section>
 	 <div class="container">
+		
 
 	<section>      
 
@@ -246,8 +248,9 @@ function form_inscription()
     <input type="input" class="form-control" id="pwd" name="prenomUser">
   </div>
   <div class="form-group">
-    <label for="pwd">E-mail:</label>
-    <input type="email" class="form-control" id="pwd" name="mailUser">
+    <label for="pwd">E-mail: <div id="statut"></div></label> 
+    <input type="email" class="form-control" id="username" name="mailUser" onblur="verifPseudo(this)">
+
   </div>
   <div class="form-group">
     <label for="pwd">Mot de passe:</label>
