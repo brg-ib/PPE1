@@ -12,15 +12,16 @@ function verifPseudo(champ)
    {
       surligne(champ, true);
 	  $('#statut').html('Format e-mail requis');
-      return false;
+      //return false;
    }
    else
    {
       surligne(champ, false);
-      return true;
+      //return true;
    }
 $('#username').keyup(function()
 {
+
 	var username=$('#username').val();
 	$('#statut').html('<img width="15%" height="15%" src="tmp/img/loader.gif">');
 	

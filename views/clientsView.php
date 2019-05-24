@@ -26,7 +26,7 @@ function afficher_clients($Clients)
 	  
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
-		  <div style="float: right;padding:12px 30px 14px"><a href="index.php?module=clients&action=form_add" class="btn btn-b btn-sm smooth"><i class="fa fa-plus"></i> Ajouter une client</a></div>
+		  <div style="float: right;padding:12px 30px 14px"><a href="index.php?module=clients&action=form_inscription" class="btn btn-b btn-sm smooth"><i class="fa fa-plus"></i> Ajouter une client</a></div>
 
             <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -245,11 +245,11 @@ function form_inscription()
   </div>
   <div class="form-group">
     <label for="pwd">Prénom:</label>
-    <input type="input" class="form-control" id="pwd" name="prenomUser">
+    <input type="input" class="form-control" id="prenomUser" name="prenomUser">
   </div>
   <div class="form-group">
     <label for="pwd">E-mail: <div id="statut"></div></label> 
-    <input type="email" class="form-control" id="username" name="mailUser" onblur="verifPseudo(this)">
+    <input type="email" class="form-control" id="username" name="mailUser" onblur="verifPseudo(this)" />
 
   </div>
   <div class="form-group">
@@ -258,7 +258,7 @@ function form_inscription()
   </div>
   <div class="form-group">
     <label for="pwd">Téléphone:</label>
-    <input type="password" class="form-control" id="pwd" name="telUser">
+    <input type="password" class="form-control" id="telUser" name="telUser">
   </div>
   <button type="submit" class="btn btn-primary">S'inscrire</button>
   <input type="hidden" name="module" value="clients" />

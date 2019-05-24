@@ -8,10 +8,10 @@ else
 switch($action)
 {
 	case 'liste':if ($_SESSION['connected'] && $_SESSION['level']==3) { $Clients=liste_clients($bdd); afficher_clients($Clients);} else { header('Location:index.php?module=404');}; break;
-	case 'form_add': if ($_SESSION['connected'] && $_SESSION['level']==3) { form_add_client(); } else { header('Location:index.php?module=404');}; break;
+	case 'form_add':  form_add_client();  break;
 	case 'form_inscription': form_inscription(); break;
 	case 'get':$idClient=$_GET['idClient']; get_client($bdd,$idClient); break;
-	case 'add': $nomUser=$_REQUEST['nomUser']; $prenomUser=$_REQUEST['prenomUser']; $telUser=$_REQUEST['telUser']; $passwordUser=$_REQUEST['passwordUser']; $mailUser=$_REQUEST['mailUser']; ajouter_client($nomUser,$prenomUser,$mailUser,$passwordUser,$telUser,$bdd); header('Location:index.php?module=clients');   break;
+	case 'add': $nomUser=$_REQUEST['nomUser']; $prenomUser=$_REQUEST['prenomUser']; $telUser=$_REQUEST['telUser']; $passwordUser=$_REQUEST['passwordUser']; $mailUser=$_REQUEST['mailUser']; ajouter_client($nomUser,$prenomUser,$mailUser,$passwordUser,$telUser,$bdd);   break;
 	case 'details':$idClient=$_REQUEST['idClient']; form_details_client($bdd,$idClient); break;
 	case 'form_update': $idClient=$_GET['idClient']; form_update_client($bdd,$idClient); break;
 	case 'update':$idUser=$_GET['id']; $nomUser=$_REQUEST['nomUser']; $prenomUser=$_REQUEST['prenomUser']; $telUser=$_REQUEST['telUser']; $passwordUser=$_REQUEST['passwordUser']; $mailUser=$_REQUEST['mailUser']; update_client($nomUser,$prenomUser,$mailUser,$passwordUser,$telUser,$idUser,$bdd);  header('Location:index.php?module=clients');  break;
