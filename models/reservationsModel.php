@@ -39,12 +39,13 @@ function time_2next($bdd,$idUser)
 	
 	
 	require_once 'models/clientsModel.php';
-	$User=get_client($bdd,$idUser);
-	$rangUser=$User['rangUser'];
+	$reservation=$bdd->query("Select max(rangUser) as rangUser from users");
+	$Lastrang=$reservation->fetch();
+	$lastRang=$Lastrang['rangUser']+1;
 	
 	
 	
-		$reqDateFin=$bdd->query("SELECT DATE_ADD('".$Last['dateDebut']."', INTERVAL ".$duree['duree']." DAY) as dateDebut");
+		$reqDateFin=$bdd->query("SELECT DATE_ADD('".$Last['dateDebut']."', INTERVAL ".$duree['duree']*$lastRang."  DAY) as dateDebut");
 		$date_next=$reqDateFin->fetch();
 	
 	return $date_next;

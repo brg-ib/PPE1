@@ -33,16 +33,12 @@ $('#username').keyup(function()
 			      surligne(champ, true);
 
 			$('#statut').html(data);
+
 			return false;
 		});
-	}
-	else
-	{
-		 surligne(champ, false);
-
-		$('#statut').html('');
-		return true;
-	}
+		
+	} 
+	
 	
 });
  

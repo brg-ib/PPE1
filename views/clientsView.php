@@ -139,17 +139,10 @@ function form_update_client($bdd,$idClient)
     <label for="pwd">Prénom:</label>
     <input type="input" class="form-control" id="pwd" name="prenomUser" value="<?=$Client['prenomUser']?>">
   </div>
-  <div class="form-group">
-    <label for="pwd">E-mail:</label>
-    <input type="email" class="form-control" id="pwd" name="mailUser" value="<?=$Client['mailUser']?>">
-  </div>
-  <div class="form-group">
-    <label for="pwd">Mot de passe:</label>
-    <input type="password" class="form-control" id="pwd" name="passwordUser" value="<?=$Client['passwordUser']?>">
-  </div>
+
   <div class="form-group">
     <label for="pwd">Téléphone:</label>
-    <input type="input" class="form-control" id="pwd" name="telUser" value="<?=$Client['telUser']?>">
+    <input type="input" class="form-control" id="tel" name="telUser" value="<?=$Client['telUser']?>">
   </div>
   <button type="submit" class="btn btn-primary">Modifier</button>
   <input type="hidden" name="module" value="clients" />
@@ -241,26 +234,26 @@ function form_inscription()
 	<form>
   <div class="form-group">
     <label for="email">Nom:</label>
-    <input type="input" class="form-control" id="email" name="nomUser">
+    <input type="input" class="form-control" id="email" name="nomUser" required />
   </div>
   <div class="form-group">
     <label for="pwd">Prénom:</label>
-    <input type="input" class="form-control" id="prenomUser" name="prenomUser">
+    <input type="input" class="form-control" id="prenomUser" name="prenomUser" required />
   </div>
   <div class="form-group">
     <label for="pwd">E-mail: <div id="statut"></div></label> 
-    <input type="email" class="form-control" id="username" name="mailUser" onblur="verifPseudo(this)" />
+    <input type="email" class="form-control" id="username" name="mailUser" onblur="verifPseudo(this)" required />
 
   </div>
   <div class="form-group">
     <label for="pwd">Mot de passe:</label>
-    <input type="password" class="form-control" id="pwd" name="passwordUser">
+    <input type="password" class="form-control" id="pwd" name="passwordUser" required />
   </div>
   <div class="form-group">
     <label for="pwd">Téléphone:</label>
-    <input type="password" class="form-control" id="telUser" name="telUser">
+    <input type="input" class="form-control" id="telUser" name="telUser" required />
   </div>
-  <button type="submit" class="btn btn-primary">S'inscrire</button>
+  <button type="submit" class="btn btn-primary" id="btnOk" />S'inscrire</button>
   <input type="hidden" name="module" value="clients" />
   <input type="hidden" name="action" value="add" />
 </form>
@@ -293,12 +286,35 @@ function form_connexion()
   </div>
   <div class="form-group form-check">
     <label class="form-check-label">
-      <input class="form-check-input" type="checkbox"> Remember me
-    </label>
+<a href="index.php?module=clients&action=form_password_forgot"/>Mot de passe oublié ? </a>    </label>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
   <input type="hidden" name="module" value="clients" />
   <input type="hidden" name="action" value="connexion" />
+</form>
+</div></div></div></section>
+	<?php
+}
+function form_password_forgot()
+{
+	?>
+	<section>
+	 <div class="container">
+
+	<section>      
+
+	<div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+	<form>
+  <div class="form-group">
+    <label for="email">Adresse e-mail:</label>
+    <input type="email" class="form-control" id="email" name="mailUser">
+  </div>
+  
+ 
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <input type="hidden" name="module" value="clients" />
+  <input type="hidden" name="action" value="forgot" />
 </form>
 </div></div></div></section>
 	<?php

@@ -25,10 +25,10 @@ function ajouter_client($nomUser,$prenomUser,$mailUser,$passwordUser,$telUser,$b
 
 
 
-function update_client($nomUser,$prenomUser,$mailUser,$telUser,$passwordUser,$idUser,$bdd)
+function update_client($nomUser,$prenomUser,$telUser,$idUser,$bdd)
 {
-	$reqUpdateUser=$bdd->prepare("update users SET nomUser=?,prenom_user=?,mailUser=?,telUser=?,passwordUser=sha1(?) where idUser=?");
-	$reqUpdateUser->execute(array($nomUser,$prenomUser,$mailUser,$telUser,$passwordUser,$idUser));
+	$reqUpdateUser=$bdd->prepare("update users SET nomUser=?,prenomUser=?,telUser=? where idUser=?");
+	$reqUpdateUser->execute(array($nomUser,$prenomUser,$telUser,$idUser));
 	}
 function activate_client($bdd,$idUser)
 {
@@ -41,8 +41,35 @@ function desactivate_client($bdd,$idUser)
 }
 function delete_client($bdd,$idUser)
 {
-			$reqDeleteUser=$bdd->query("delete from users where idUser=".$idUser);
+	$reqDeleteUser=$bdd->prepare("delete from users where idUser=?");
+	$reqDeleteUser->execute(array($idUser));
+	var_dump($reqDeleteUser);
 }
+function forgot($bdd,$mailUser)
+{
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randstring = '';
+    for ($i = 0; $i < 10; $i++) {
+        $randstring = $characters[rand(0, strlen($characters))];
+    }
+	
+	$reqforgot=$bdd->prepare("update users set codeUser=?");
+	
+	$reqforgot->execute(array($randstring));
+	$message="Bonjour, Pour modifier votre mot de passe veuillez utiliser le code suivant : ".$randstring;
+	
+	$to      = $mailUser;
+$subject = 'Modification de mot de passe PARKiN';
+$headers = array(
+    'From' => 'webmaster@parkin.com',
+    'X-Mailer' => 'PHP/' . phpversion()
+);
+
+mail($to, $subject, $message, $headers);
+
+
+}
+
 
 function connecter($bdd,$mailUser,$passwordUser)
 {

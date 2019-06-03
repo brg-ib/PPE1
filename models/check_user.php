@@ -10,7 +10,7 @@ if (isset($_POST['username']))
 	$User=$bdd->prepare("Select * from users where mailUser = ?");
 	$User->execute(array($username));
 	if($User->fetch())
-	{ echo "Déja existant"; }
+	{ echo "Déja existant , <a href='index.php?module=clients&action=form_connexion'> Connectez vous </a>"; }
 	}
 	else
 	{
