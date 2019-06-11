@@ -122,7 +122,7 @@ var x = setInterval(function() {
 					 <?php
 					 
 					 require_once 'models/reservationsModel.php';
-					 $nextime=time_2next($bdd,$_SESSION['id']);
+					 $nextime=time_2($bdd,$_SESSION['id']);
 					 
 					 ?>
 					 </p>

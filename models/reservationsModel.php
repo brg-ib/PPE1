@@ -39,13 +39,36 @@ function time_2next($bdd,$idUser)
 	
 	
 	require_once 'models/clientsModel.php';
-	$reservation=$bdd->query("Select max(rangUser) as rangUser from users");
-	$Lastrang=$reservation->fetch();
-	$lastRang=$Lastrang['rangUser']+1;
+	$User=get_client($bdd,$idUser);
+	$rangUser=$User['rangUser'];
 	
 	
 	
-		$reqDateFin=$bdd->query("SELECT DATE_ADD('".$Last['dateDebut']."', INTERVAL ".$duree['duree']*$lastRang."  DAY) as dateDebut");
+		$reqDateFin=$bdd->query("SELECT DATE_ADD('".$Last['dateDebut']."', INTERVAL ".$duree['duree']*$rangUser." DAY) as dateDebut");
+		$date_next=$reqDateFin->fetch();
+	
+	return $date_next;
+	
+}
+
+function time_2($bdd,$idUser)
+{
+	$reqDuree=$bdd->query("Select valeurSetting as duree from settings where cleSetting='duree'");
+	$duree=$reqDuree->fetch();
+	
+	
+	
+	$reservation=$bdd->query("Select max(dateDebut) as dateDebut from reservation where dateDebut<=now() and dateFin>=now()");
+	$Last=$reservation->fetch();
+	
+	
+	$client=$bdd->query("Select max(rangUser) as rangUser from users");
+	$Lastc=$client->fetch();
+	$rangUser=$Lastc['rangUser']+1;
+	
+	
+	
+		$reqDateFin=$bdd->query("SELECT DATE_ADD('".$Last['dateDebut']."', INTERVAL ".$duree['duree']*$rangUser." DAY) as dateDebut");
 		$date_next=$reqDateFin->fetch();
 	
 	return $date_next;
