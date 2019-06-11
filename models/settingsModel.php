@@ -4,6 +4,11 @@ function liste_settings($bdd)
 	$settings=$bdd->query("Select * from settings");
 	return $settings->fetchALL();
 }
+function get_setting($bdd,$idSetting)
+{
+	$Place=$bdd->query("Select * from settings where idSetting=".$idSetting);
+	return $Place->fetch();
+}
 function details_setting($idPlace)
 {
 	$Place=$bdd->query("Select * from setting where idPlace=".$idPlace);

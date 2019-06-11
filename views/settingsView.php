@@ -94,12 +94,16 @@ function form_update_setting($bdd,$idSetting)
 	  
         <div class="row">
           <div class="col-lg-8 mx-auto">
-		  		  <h2>Modifier une setting : <?=$Setting['nomSetting']?></h2>
+		  		  <h2>Modifier une setting : <?=$Setting['cleSetting']?></h2>
 
 	<form>
   <div class="form-group">
     <label for="nomUser">Nom</label>
-    <input type="text" class="form-control"  settingholder="Nom de la setting" name="nomSetting" value="<?= $Setting['nomSetting']; ?>" />
+    <input type="text" class="form-control"  settingholder="Nom de la setting" name="nomSetting" value="<?= $Setting['cleSetting']; ?>" />
+  </div>
+  <div class="form-group">
+    <label for="nomUser">Valeur</label>
+    <input type="text" class="form-control"  settingholder="Nom de la setting" name="valeurSetting" value="<?= $Setting['valeurSetting']; ?>" />
   </div>
  <input type="submit" class="btn btn-primary" name="ajouter" value="Modifier" />
 	 <input type="hidden" name="module" value="settings" />
